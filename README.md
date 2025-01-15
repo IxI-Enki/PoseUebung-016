@@ -12,24 +12,33 @@ title: UNO
 ---
 
 flowchart TB
-    strt@{ shape: start } --- crDck[Create Deck]@{shape: rounded}
-    strt --- dfPlyr["Define Players"]@{shape: rounded}
 
-    dfPlyr --- fxPlyr["Stored Players"]@{shape: win-pane	}
-    fxPlyr --- dfPlyrOrdr["Define PLayer Order"]@{shape: hex}
-    fxPlyr --- fxStrtCndtns
-    fxDck --- fxStrtCndtns
+    strt[         S T A R T           ]@{ shape: circle   }
+    crDck[        Create Deck         ]@{ shape: rounded  }
+    dfPlyr[       Define Players      ]@{ shape: rounded  }
+    fxPlyr[       Stored Players      ]@{ shape: h-cyl    }
+    dfPlyrOrdr[   Define PLayer Order ]@{ shape: fr-rect  }
+    fxStrtCndtns[ Start Conditions    ]@{ shape: win-pane }
+    shDck[        Schuffle Deck       ]@{ shape: hex      }
+    rvCrd[        Reveal First Card   ]@{ shape: fr-rect  }
+    fxDck[        Stored Deck         ]@{ shape: h-cyl    }
+    hndPlyr[      Hand Out Cards      ]@{ shape: st-rect  }
+    bgnGame[      Game Loop           ]@{ shape: dbl-circ }
 
-    crDck --- shDck["Schuffle Deck"]@{ shape: hex	}
-    shDck --- fxDck["Stored Deck"]@{shape: win-pane	}
-
-    fxStrtCndtns -.- rvCrd["Reveal First Card"]@{ shape: fr-rect}
-
-    dfPlyrOrdr --- fxStrtCndtns["Start Condition"]@{shape: dbl-circ}
-    rvCrd --- bgnGame
-
-    fxStrtCndtns --- hndPlyr["Hand Out Cards"]@{shape: st-rect}
-    hndPlyr --- bgnGame["Start Game Loop"]@{shape: stadium}
+    strt         ---     crDck
+    crDck        ---     shDck
+    shDck        ---     fxDck
+    strt         ---     dfPlyr 
+    hndPlyr      ---     fxPlyr
+    dfPlyr       ------  fxPlyr 
+    fxDck        ---     rvCrd
+    fxDck        ---     hndPlyr
+    fxPlyr       ---     dfPlyrOrdr 
+    rvCrd        -.-o   fxStrtCndtns
+    fxDck        -.-o   fxStrtCndtns
+    fxPlyr       -.-o    fxStrtCndtns 
+    dfPlyrOrdr   -.-o   fxStrtCndtns 
+    fxStrtCndtns ---     bgnGame
 
 ```
 
