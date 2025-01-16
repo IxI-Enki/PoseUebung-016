@@ -103,7 +103,7 @@ flowchart TB
 
     end
 
-    Game-Setup -......-o  | send Setup status | fxStrtCndtns 
+    Game-Setup -.....-o  | send Setup status | fxStrtCndtns 
       linkStyle 17 stroke:#e0f0407f, stroke-width:8px;
 
   %% GAME-LOOP: 
