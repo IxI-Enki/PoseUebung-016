@@ -45,8 +45,8 @@ flowchart TB
   
 
   %%_BUILDING: ________________________________________________________________
-    strt --- Deck-Building
-    strt --- Player-Registration 
+    strt -.- Deck-Building
+    strt -.- Player-Registration 
       linkStyle 0,1 color:#000, stroke:#af6, stroke-width:8px;
 
     %%___PLAYERS: _____________________
