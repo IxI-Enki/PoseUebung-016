@@ -23,11 +23,11 @@ flowchart TB
     strt[         *App-Start*     ]@{ shape: circle   }
     init[         i               ]@{ shape: fork     }
     ip[           i               ]@{ shape: fork     }
-    e[            foreach         ]@{ shape: flip-tri }
+    e[            foreach         ]@{ shape: hex }
     d[            Deck            ]@{ shape: win-pane }
          
          id@{ shape: tri,     label: "Split\n Deck"  }
-    hndPlyr@{ shape: st-rect, label: "Handout Cards" }
+    hndPlyr@{ shape: st-rect, label: "Handout\nCards" }
     
   %% CLASS STYLES:
     style strt color:#0f0f, fill:#f1f4f230, stroke:#001f0090, stroke-width:33px;
@@ -43,8 +43,9 @@ flowchart TB
     
     style Player-Registration color:#000, fill:#7a7, stroke:#001f0070, stroke-width:9px;
     style Deck-Building       color:#000, fill:#477, stroke:#00001f70, stroke-width:9px;
-    style Game-Setup          color:#000, fill:#794, stroke:#ffff0170, stroke-width:10px;
+    style Game-Setup          color:#000, fill:#497, stroke:#04edff50, stroke-width:10px;
   
+    style Player-Initialization color:#000, fill:#f0f0f031, stroke:#00000050, stroke-width:10px;
 
   %%_BUILDING: ________________________________________________________________
     strt -.- Deck-Building
@@ -57,7 +58,7 @@ flowchart TB
       dfPlyr --> | throw coins | dfPlyrOrdr 
         linkStyle 2 color:#fff, stroke:#000, stroke-width:4px;
     end
-    Player-Registration -.-o | send list of Players | Game-Setup
+    Player-Registration -.-o | send list of Players | fxPlyr
       linkStyle 3 color:#ffff00, stroke:#a0f06090, stroke-width:13px;
 
     %%___DECK: ________________________
@@ -66,47 +67,48 @@ flowchart TB
       crDck --> | as singelton | shDck
         linkStyle 4 color:#fff, stroke:#000, stroke-width:4px;
     end
-    Deck-Building -.-o | send shuffled Deck   | Game-Setup
+    Deck-Building -.-o | send shuffled Deck   | fxDck
       linkStyle 5 color:#cef, stroke:#a0f06090, stroke-width:13px;
    
+      fxPlyr -.-> ip
+      fxDck  -.-> id
+        linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+      
   %%_GAME-SETUP: ______________________________________________________________
     subgraph Game-Setup
       direction TB 
 
     %% PLAYER INIT:
-      fxPlyr --o ip
-      fxDck  --o id
-        linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
-
-      ip -.-> | Player  | e
-      id -.-> | 5 Cards | e 
-      %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+      ip -.-> | Player  | Player-Initialization
+      id -.-> | 5 Cards | Player-Initialization 
+        linkStyle 8,9 stroke:#000, stroke-width:3px;
 
         subgraph Player-Initialization
+          direction RL
           e --> hndPlyr
-          %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+            linkStyle 10 stroke:#000, stroke-width:3px;
         end
 
       Player-Initialization -..-> players
-      %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+      id                   -.->          | first Card     | rvCrd
+      id                   -.->          | remaining Deck | d
+      players              -.-o          | register | init   
+      rvCrd                -.-o          | register | init
+      d                    -.-o          | register | init
+ 
+       linkStyle 11,12,13,14,15,16 stroke:#000, stroke-width:8px;
+       
+  
+  
 
-      
-      id    -.-> | first Card     | rvCrd
-      id    -.-> | remaining Deck | d
-      %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
-      
-      players -.-o | register | init   
-      rvCrd   -.-o | register | init
-      d       -.-o | register | init
-      %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
     end
 
-    Game-Setup -.-o  | send Setup status | fxStrtCndtns 
-    %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+    Game-Setup -......-o  | send Setup status | fxStrtCndtns 
+      linkStyle 17 stroke:#e0f0407f, stroke-width:8px;
 
   %% GAME-LOOP: 
     fxStrtCndtns ==> | Run-Game-Loop     | bgnGame
-    %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+      linkStyle 18 stroke:#e0f0407f, stroke-width:8px;
 
 ```
 </div>
