@@ -22,7 +22,6 @@ flowchart TB
     fxDck[        Stored Deck         ]@{ shape: h-cyl    }
     strt[         *App-Start*         ]@{ shape: circle   }
     init[         i                   ]@{ shape: fork     }
-    p[            Player              ]@{ shape: fork     }
     e[            Initialize          ]@{ shape: flip-tri }
     ip[           i                   ]@{ shape: fork     }
                                      id@{ shape: tri, label: "Split\n Deck" }
