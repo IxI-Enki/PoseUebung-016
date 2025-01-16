@@ -32,18 +32,24 @@ sequenceDiagram
       note over P : .Main ( )
     G-->>GC : starts the Controller
       note over G: .Start ( )
+    rect rgb(35, 75, 75)
+
+    rect rgb(35, 95, 75)
     GC->>D : resets the Deck.Instance
       note over D : .Deck.Instance
       par resets the Deck Instance
       D->>D : 
         note over D: .Shuffle ( ) 
-        D-->>GC : returns a shuffled Deck 
+       D-->>GC : returns a shuffled Deck 
+        end
           note over GC: Deck < Card >  PlayCards 
       end
 
+    rect rgb(35, 85, 35)
     par
     GC->>GC : RevealFirstCard ( )
       note over GC: Card RevealedCard
+    end
     end
 
     rect rgb(48,96,75)
@@ -51,7 +57,7 @@ sequenceDiagram
       note over PF: .Call ( ) 
       %% note over GC,PF:  
     PF ->>+User: asks for PlayerAmount
-      note left of PF : .GetUserInput ( ) 
+      note over PF : .GetUserInput ( ) 
     User ->> PF : inputs Player Count
       note over User,PF: int PlayerCount 
       note over PF: .Create ( PlayerCount )
@@ -69,11 +75,11 @@ sequenceDiagram
 
       note over GC: .HandOut ( )
       loop 
-            GC-->>GC: foreach
         note over GC: List < Player >  AllPlayers
-            note over PL: PLayer 
-            GC->PL: 
-            note over PL: .TakeCard ( 5 )
+        note over PL: PLayer 
+          GC->PL: 
+        note over PL: .TakeCard ( 5 )
+      end
       end
   
      %% note over GC: 
