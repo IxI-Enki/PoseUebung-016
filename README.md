@@ -83,18 +83,18 @@ flowchart TB
         subgraph Player-Initialization
           note[ each ]@{shape: text} ~~~ e
             style note color:#000, fill:#d7d9d409, stroke:#ffffff30, stroke-width:2px;
-        
           e --> hndPlyr
+        
           %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
         end
 
-      Player-Initialization -..-> | register Players | init
+      Player-Initialization -.-> | register Players | init
       %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
       
-      id    ---> | first Card     | rvCrd
-      rvCrd ---> | register Card  | init
-      id    ---> | remaining Deck | d
-      d     ---> | register Deck  | init
+      id    -.-> | first Card     | rvCrd
+      rvCrd -.-> | register Card  | init
+      id    -.-> | remaining Deck | d
+      d     -.-> | register Deck  | init
       %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
       
     end
