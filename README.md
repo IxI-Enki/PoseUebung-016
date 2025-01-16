@@ -4,31 +4,108 @@
 
 <div align="center">
 
+---
 
+### Sequence
 ```mermaid
+sequenceDiagram
+  autonumber
+  
+  box Black
+    participant G as Game
+    participant P as Program
+  end
+  box rgb(55, 105, 55)
+    actor User as U s e r s 
+    participant GC as GameController
+  end
+
+
+  box rgb(20, 80, 80) static Creators
+  participant PF as PlayerFactory 
+  participant D as Deck
+  end 
+
+    User->>P : executes
+      note over P,User: .exe 
+    P->>G : starts the Game
+      note over P : .Main ( )
+    G-->>GC : starts the Controller
+      note over G: .Start ( )
+    GC->>D : resets the Deck.Instance
+      note over D : .Deck.Instance
+      par resets the Deck Instance
+      D->>D : 
+        note over D: .Shuffle ( ) 
+        D-->>GC : returns a shuffled Deck 
+          note over GC: Deck < Card >  PlayCards 
+      end
+
+    par
+    GC->>GC : RevealFirstCard ( )
+      note over GC: Card RevealedCard
+    end
+
+    rect rgb(48,96,75)
+    GC->>PF : starts Player Factory
+      note over PF: .Call ( ) 
+      %% note over GC,PF:  
+    PF ->>+User: asks for PlayerAmount
+      note left of PF : .GetUserInput ( ) 
+    User ->> PF : inputs Player Count
+      note over User,PF: int PlayerCount 
+      note over PF: .Create ( PlayerCount )
+
+  create participant PL as PLayer
+    PF->>PL: new
+    loop 
+      note over PL: new 
+  destroy PL
+    PL->>PF: return List of Players 
+    end
+      note over GC,PF: List < Player >  AllPlayers
+    end
  
-flowchart TB
+
+      note over GC: .HandOut ( )
+      loop 
+            GC-->>GC: foreach
+        note over GC: List < Player >  AllPlayers
+            note over PL: PLayer 
+            GC->PL: 
+            note over PL: .TakeCard ( 5 )
+      end
+  
+     %% note over GC: 
+   
+    GC->G:End
+    G->P:Exit
+```
+
+---
+### Flowchart
+```mermaid
+flowchart LR
 
   %% NODES:
-    fxStrtCndtns[ Game Conditions ]@{ shape: win-pane }
-    dfPlyrOrdr[   Define Order    ]@{ shape: hex      }
-    bgnGame[      Game Loop       ]@{ shape: dbl-circ }
-    players[      Players         ]@{ shape: win-pane }
-    fxPlyr[       Stored Players  ]@{ shape: h-cyl    }
-    dfPlyr[       set Players     ]@{ shape: rounded  }
-    rvCrd[        Revealed Card   ]@{ shape: win-pane }
-    shDck[        Schuffle Deck   ]@{ shape: hex      }
-    crDck[        Create Deck     ]@{ shape: rounded  }
-    fxDck[        Stored Deck     ]@{ shape: h-cyl    }
-    strt[         *App-Start*     ]@{ shape: circle   }
-    init[         i               ]@{ shape: fork     }
-    e[            foreach         ]@{ shape: hex }
-    d[            Deck            ]@{ shape: win-pane }
-         
+    fxStrtCndtns[ Game Conditions  ]@{ shape: win-pane }
+    dfPlyrOrdr[   Define Order     ]@{ shape: hex      }
+    bgnGame[      Game Loop        ]@{ shape: dbl-circ }
+    players[      Players          ]@{ shape: win-pane }
+    fxPlyr[       Stored Players   ]@{ shape: h-cyl    }
+    dfPlyr[       set Players      ]@{ shape: rounded  }
+    rvCrd[        Revealed Card    ]@{ shape: win-pane }
+    shDck[        Schuffle Deck    ]@{ shape: hex      }
+    crDck[        Create Deck      ]@{ shape: rounded  }
+    fxDck[        Stored Deck      ]@{ shape: h-cyl    }
+    strt[         *App-Start*      ]@{ shape: circle   }
+    init[         Stored Game Data ]@{ shape: h-cyl    }
+    e[            foreach          ]@{ shape: hex      }
+    d[            Deck             ]@{ shape: win-pane }
 
-         ip@{ shape: st-rect, label: "Select\n Player"  }
-         id@{ shape: tri,     label: "Split\n Deck"  }
-    hndPlyr@{ shape: st-rect, label: "Handout\nCards" }
+         ip@{ shape: st-rect, label: "Select\n Player" }
+         id@{ shape: tri,     label: "Split\n Deck"    }
+    hndPlyr@{ shape: st-rect, label: "Handout\nCards"  }
     
   %% CLASS STYLES:
     style strt color:#0f0f, fill:#f1f4f230, stroke:#001f0090, stroke-width:33px;
@@ -84,32 +161,32 @@ flowchart TB
       ip -.-> | Player  | Player-Initialization
         linkStyle 8,9 stroke:#000, stroke-width:3px;
 
-        subgraph Player-Initialization
-          direction RL
-          e --> hndPlyr
-            linkStyle 10 stroke:#000, stroke-width:3px;
-        end
+      subgraph Player-Initialization
+        direction TB
+        e --> hndPlyr
+          linkStyle 10 stroke:#000, stroke-width:3px;
+      end
 
-      Player-Initialization -..-> players
-      id                   -.->          | first Card     | rvCrd
-      id                   -.->          | remaining Deck | d
-      players              -.-o          | register | init   
-      rvCrd                -.-o          | register | init
-      d                    -.-o          | register | init
- 
-       linkStyle 11,12,13,14,15,16 stroke:#000, stroke-width:8px;
-       
-  
-  
-
+      Player-Initialization -.-> players
+      id                    -->          | first Card     | rvCrd
+      id                    -->          | remaining Deck | d
+        linkStyle 11,12,13 stroke:#000, stroke-width:3px;
     end
+      
+      players              o-.-o          | register | init   
+      rvCrd                o-.-o          | register | init
+      d                    o-.-o          | register | init
+        linkStyle 14,15,16 stroke:#000, stroke-width:8px;
 
-    Game-Setup -.....-o  | send Setup status | fxStrtCndtns 
-      linkStyle 17 stroke:#e0f0407f, stroke-width:8px;
+    init --> | send Setup status | fxStrtCndtns 
+      linkStyle 17 stroke:#000, stroke-width:8px;
 
   %% GAME-LOOP: 
     fxStrtCndtns ==> | Run-Game-Loop     | bgnGame
-      linkStyle 18 stroke:#e0f0407f, stroke-width:8px;
+      linkStyle 18 stroke:#000, stroke-width:4px;
 
 ```
+
+---
+
 </div>
