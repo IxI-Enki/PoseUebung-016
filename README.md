@@ -22,10 +22,11 @@ flowchart TB
     fxDck[        Stored Deck     ]@{ shape: h-cyl    }
     strt[         *App-Start*     ]@{ shape: circle   }
     init[         i               ]@{ shape: fork     }
-    ip[           i               ]@{ shape: fork     }
     e[            foreach         ]@{ shape: hex }
     d[            Deck            ]@{ shape: win-pane }
          
+
+         ip@{ shape: st-rect, label: "Select\n Player"  }
          id@{ shape: tri,     label: "Split\n Deck"  }
     hndPlyr@{ shape: st-rect, label: "Handout\nCards" }
     
@@ -79,8 +80,8 @@ flowchart TB
       direction TB 
 
     %% PLAYER INIT:
-      ip -.-> | Player  | Player-Initialization
       id -.-> | 5 Cards | Player-Initialization 
+      ip -.-> | Player  | Player-Initialization
         linkStyle 8,9 stroke:#000, stroke-width:3px;
 
         subgraph Player-Initialization
