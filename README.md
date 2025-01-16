@@ -10,22 +10,24 @@
 flowchart TB
 
   %% NODES:
-    fxStrtCndtns[ Game Conditions     ]@{ shape: win-pane }
-    dfPlyrOrdr[   Define Order        ]@{ shape: hex      }
-    bgnGame[      Game Loop           ]@{ shape: dbl-circ }
-    hndPlyr[      Hand Out            ]@{ shape: st-rect  }
-    dfPlyr[       set Players         ]@{ shape: rounded  }
-    fxPlyr[       Stored Players      ]@{ shape: h-cyl    }
-    crDck[        Create Deck         ]@{ shape: rounded  }
-    shDck[        Schuffle Deck       ]@{ shape: hex      }
-    rvCrd[        Start Card          ]@{ shape: win-pane }
-    fxDck[        Stored Deck         ]@{ shape: h-cyl    }
-    strt[         *App-Start*         ]@{ shape: circle   }
-    init[         i                   ]@{ shape: fork     }
-    e[            Initialize          ]@{ shape: flip-tri }
-    ip[           i                   ]@{ shape: fork     }
-                                     id@{ shape: tri, label: "Split\n Deck" }
-    d[            Deck                ]@{ shape: win-pane }
+    fxStrtCndtns[ Game Conditions ]@{ shape: win-pane }
+    dfPlyrOrdr[   Define Order    ]@{ shape: hex      }
+    bgnGame[      Game Loop       ]@{ shape: dbl-circ }
+    players[      Players         ]@{ shape: win-pane }
+    fxPlyr[       Stored Players  ]@{ shape: h-cyl    }
+    dfPlyr[       set Players     ]@{ shape: rounded  }
+    rvCrd[        Revealed Card   ]@{ shape: win-pane }
+    shDck[        Schuffle Deck   ]@{ shape: hex      }
+    crDck[        Create Deck     ]@{ shape: rounded  }
+    fxDck[        Stored Deck     ]@{ shape: h-cyl    }
+    strt[         *App-Start*     ]@{ shape: circle   }
+    init[         i               ]@{ shape: fork     }
+    ip[           i               ]@{ shape: fork     }
+    e[            foreach         ]@{ shape: flip-tri }
+    d[            Deck            ]@{ shape: win-pane }
+         
+         id@{ shape: tri,     label: "Split\n Deck"  }
+    hndPlyr@{ shape: st-rect, label: "Handout Cards" }
     
   %% CLASS STYLES:
     style strt color:#0f0f, fill:#f1f4f230, stroke:#001f0090, stroke-width:33px;
@@ -72,32 +74,33 @@ flowchart TB
       direction TB 
 
     %% PLAYER INIT:
-      fxPlyr --> ip
-      fxDck  --> id
+      fxPlyr --o ip
+      fxDck  --o id
         linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
 
-      ip -..-> | Player  | e
-      id -..-> | 5 Cards | e 
+      ip -.-> | Player  | e
+      id -.-> | 5 Cards | e 
       %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
 
         subgraph Player-Initialization
-          note[ each ]@{shape: text} ~~~ e
-            style note color:#000, fill:#d7d9d409, stroke:#ffffff30, stroke-width:2px;
           e --> hndPlyr
-        
           %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
         end
 
-      Player-Initialization -.-> | register Players | init
+      Player-Initialization -..-> players
       %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
+
       
       id    -.-> | first Card     | rvCrd
-      rvCrd -.-> | register Card  | init
       id    -.-> | remaining Deck | d
-      d     -.-> | register Deck  | init
       %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
       
+      players -.-o | register | init   
+      rvCrd   -.-o | register | init
+      d       -.-o | register | init
+      %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
     end
+
     Game-Setup -.-o  | send Setup status | fxStrtCndtns 
     %%  linkStyle 6,7 stroke:#e0f0407f, stroke-width:8px;
 
