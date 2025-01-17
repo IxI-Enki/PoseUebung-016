@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConApp", "ConApp", "{8575DA01-6B6F-4F40-93DB-AA65DDDC4156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGameSimulator.ConApp", "CardGameSimulator.ConApp\CardGameSimulator.ConApp.csproj", "{A545B651-CC60-429F-80BE-EB39110508D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{27BA85D5-199E-4A22-8F72-77119CA90C6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGameSimulator.Logic", "CardGameSimulator.Logic\CardGameSimulator.Logic.csproj", "{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{49EAF0D3-EAC4-48FA-B7DA-8C420F788EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGameSimulator.UnitTests", "CardGameSimulator.UnitTests\CardGameSimulator.UnitTests.csproj", "{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A545B651-CC60-429F-80BE-EB39110508D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A545B651-CC60-429F-80BE-EB39110508D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A545B651-CC60-429F-80BE-EB39110508D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A545B651-CC60-429F-80BE-EB39110508D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A545B651-CC60-429F-80BE-EB39110508D7} = {8575DA01-6B6F-4F40-93DB-AA65DDDC4156}
+		{E88A7F5A-E9A0-4BDE-9BF3-0A43ABAEBCC1} = {27BA85D5-199E-4A22-8F72-77119CA90C6A}
+		{B63CAD8D-D8BF-4C31-AF86-CBD56AB2DB10} = {49EAF0D3-EAC4-48FA-B7DA-8C420F788EC9}
+	EndGlobalSection
+EndGlobal

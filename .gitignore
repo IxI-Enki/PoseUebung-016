@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/CardGameSimulator/.vs/CardGameSimulator
+/CardGameSimulator/.vs/ProjectEvaluation
+/CardGameSimulator/CardGameSimulator.ConApp/bin/Debug/net8.0
+/CardGameSimulator/CardGameSimulator.ConApp/obj
+/CardGameSimulator/CardGameSimulator.Logic/bin/Debug/net8.0
+/CardGameSimulator/CardGameSimulator.Logic/obj
+/CardGameSimulator/CardGameSimulator.UnitTests/bin/Debug/net8.0
+/CardGameSimulator/CardGameSimulator.UnitTests/obj
