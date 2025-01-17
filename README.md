@@ -35,22 +35,22 @@ sequenceDiagram
     rect rgb(35, 75, 75)
 
     rect rgb(35, 95, 75)
-    GC->>D : resets the Deck.Instance
+      par gets the shuffled Deck Instance
+    GC->>D : requests the Deck.Instance
       note over D : .Deck.Instance
-      par resets the Deck Instance
       D->>D : 
         note over D: .Shuffle ( ) 
-       D-->>GC : returns a shuffled Deck 
-        end
-          note over GC: Deck < Card >  PlayCards 
-      end
-
     rect rgb(35, 85, 35)
     par
-    GC->>GC : RevealFirstCard ( )
-      note over GC: Card RevealedCard
+    D->>D : RevealFirstCard ( )
+      note over D: Card RevealedCard
     end
     end
+       D-->>GC : returns a shuffled Deck 
+        end
+          note over D, GC: Deck < Card >  PlayCards 
+      end
+
 
     rect rgb(48,96,75)
     GC->>PF : starts Player Factory
