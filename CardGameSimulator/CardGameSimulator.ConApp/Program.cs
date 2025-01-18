@@ -1,7 +1,4 @@
-﻿
-using System.Xml.Linq;
-
-namespace CardGameSimulator.ConApp;
+﻿namespace CardGameSimulator.ConApp;
 
 internal class Program
 {
