@@ -9,7 +9,7 @@ internal class Program
         {
                 Console.SetWindowSize( 60 , 14 );
 
-                GameController game = new( true );
+                GameController game = new( );
 
                 Console.ReadLine( );
         }
@@ -70,7 +70,6 @@ class GameController
 
                 this.Run( );
         }
-
         public void Run( )
         {
                 int numberOfStates = StateController.GameStates.Length;
@@ -166,12 +165,10 @@ class GameController
         //
         //}
 }
-
 class Card( uint n , Color c )
 {
         public uint N { get; set; } = ( uint )n <= 9 ? n : 0;
         public Color C { get; set; } = ( Color )c;
-
         public override string ToString( ) => $"{N}".BackgroundColor( ColorCardOutput( ) ).ForegroundColor( "0,0,0" );
         public string ColorCardOutput( )
         => C switch
@@ -182,7 +179,6 @@ class Card( uint n , Color c )
                 Color.Red => "255,80,80",
                 _ => ""
         };
-
         internal static class Factory
         {
                 public static Card Create( uint n , Color c ) => new( n , c );
@@ -215,10 +211,8 @@ class Deck
         public Card? Revealed { get; set; }
         private bool _isShuffled = false;
         public Deck( ) { }
-
         public List<Card>? Cards { get; set; }
         public bool IsShuffled { get => _isShuffled; set => _isShuffled = value; }
-
         public void Shuffle( )
         {
                 int n = Cards!.Count;
@@ -232,7 +226,6 @@ class Deck
                 Cards = p;
                 IsShuffled = true;
         }
-
         public override string ToString( )
         {
                 StringBuilder sb = new( "\n  Gesamtes Deck:\n ---------------------------------------------\n   ".ForegroundColor( "green" ) );
@@ -258,7 +251,6 @@ class DeckController
 
                 Deck = Factory.Create( );
         }
-
         static class Factory
         {
                 public static Deck Create( )
@@ -272,11 +264,8 @@ class DeckController
                         return d;
                 }
         }
-
         public GameController GameController { get; }
-
         public Deck Deck { get; }
-
         public DeckArg DeckArgs( ) => new( this.Deck );
 }
 class DeckArg( Deck d ) : EventArgs
@@ -292,7 +281,6 @@ class DeckArg( Deck d ) : EventArgs
                              .AppendLine( this.Deck.ToString( ) )
                          .ToString( );
 }
-
 class Player
 {
         public bool HasPlayedACard { get; set; }
@@ -464,7 +452,6 @@ class PlayerController
                 return sb.ToString( );
         }
 }
-
 class PrintController
 {
         public PrintController( GameController gc )
@@ -476,7 +463,6 @@ class PrintController
                 this.Index = 0;
                 ToPrint = GetCurrent( );
         }
-
         void GameControllerUpdate( object controller , EventArgs args )
         {
                 if(args is PrintArg p && p.Index != this.Index)
@@ -489,7 +475,6 @@ class PrintController
         }
         GameController Controller { get; set; }
         private Print? GetCurrent( ) => Prints[ Index ];
-
         public void DisplayCurrent( )
         {
                 if(ToPrint != null)
@@ -507,9 +492,7 @@ class PrintController
                         }
                 Updated?.Invoke( this , PrintArgs( ) );
         }
-
         private void PrintScreen( ) => StringToPrint = ConstructScreen( );
-
         private string? ConstructScreen( )
         {
                 string result = "";
@@ -534,22 +517,18 @@ class PrintController
                 }
                 return result;
         }
-
         private void PrintGameOver( )
         {
                 throw new NotImplementedException( );
         }
-
         private void PrintGreeting( )
         {
                 StringToPrint = "\n\t Hello \n\n";
         }
         string? StringToPrint { get; set; }
-
         public uint Index { get => _index; set => _index = value > 12 ? 0 : value; }
         private uint _index;
         public event EventHandler<PrintArg>? Updated;
-
         private static readonly Print[] Prints =
                 [
                         Print.Greeting,
@@ -566,7 +545,6 @@ class PrintArg( uint index , Print? state , string? toPrint ) : EventArgs
         public string? ToPrint { get; set; } = toPrint;
         public override string ToString( ) => $"PrintArg[{Index,2}]:{PrintState}";
 }
-
 class StateController
 {
         public static StateController? Instance { get; }
@@ -576,7 +554,6 @@ class StateController
                 Index = 0;
                 LastState = GetCurrent( );
         }
-
         public void AdvanceState( )
         {
                 this.Index++;
@@ -589,10 +566,8 @@ class StateController
                 Updated?.Invoke( this , StateArgs( ) );
         }
         public event EventHandler<StateArg>? Updated;
-
         public GameState? LastState { get; set; }
         public uint Index { get => _index; set => _index = value > 12 ? 0 : value; }
-
         private uint _index;
         public static readonly GameState[] GameStates =
                 [
@@ -610,7 +585,6 @@ class StateController
                         GameState.NextPlayer,
                         GameState.PrintGameOver,
                 ];
-
         public StateArg StateArgs( ) => new( Index , LastState );
 }
 class StateArg( uint index , GameState? state ) : EventArgs
@@ -625,8 +599,6 @@ enum Print
         Greeting = 0,
         Screen = 1,
         GameOver = 2,
-
-
 }
 enum GameState
 {
@@ -644,4 +616,3 @@ enum GameState
         NextPlayer,
         PrintGameOver,
 }
-
