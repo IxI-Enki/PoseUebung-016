@@ -9,5 +9,5 @@ interface IPlayer<T> where T : ICard
 
         void DrawCard( );
         void PlayCard( );
-        void Update( object gameController , EventArgs args );
+        void Update( object gameController , GameEvents args );
 }

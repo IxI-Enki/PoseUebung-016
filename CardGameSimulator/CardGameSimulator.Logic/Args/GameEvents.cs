@@ -1,18 +1,26 @@
 ﻿namespace CardGameSimulator.Logic.Args;
 
-class CardEventArgs( Card? card ) : EventArgs
+
+class GameEvents : EventArgs { }
+
+class CardEventArgs( Card? card ) : GameEvents
 {
         public Card? Card => card;
 }
 
-class TurnEventArgs( Player? player , Card? revealedCard , TurnState? state ) : EventArgs
+class PlayerEventArgs( Player? currentPlayer ) : GameEvents
 {
-        public Player? Player { get; } = player;
-        public Card? RevealedCard { get; } = revealedCard;
-        public TurnState? State { get; } = state;
+        public Player? CurrentPlayer => currentPlayer;
+
 }
 
-class GameEventArgs( GameState? state ) : EventArgs
+class TurnEventArgs( Card? revealedCard , TurnState? state ) : GameEvents
+{
+        public Card? RevealedCard => revealedCard;
+        public TurnState? State => state;
+}
+
+class GameEventArgs( GameState? state ) : GameEvents
 {
         public GameState? GameState { get; }
                 = state is GameState && state.HasValue
@@ -20,3 +28,7 @@ class GameEventArgs( GameState? state ) : EventArgs
                 : throw new Exception( );
 }
 
+class ControllerArgs( IGameController? gameController ) : GameEvents
+{
+        public IGameController? GameController => gameController;
+}

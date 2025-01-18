@@ -1,25 +1,30 @@
-﻿using CardGameSimulator.Logic.Args;
-
-namespace CardGameSimulator.Logic.Contracts;
+﻿namespace CardGameSimulator.Logic.Contracts;
 
 interface IGameController
 {
-        IGame? Game { get; }
-        IDeck? PlayCards { get; }
+        Card? RevealedCard { get; set; }
+        Game? Game { get; internal set; }
 
-        List<Player>? AllPlayers { get; }
+        Deck? PlayCards { get; internal set; }
+        event EventHandler<GameEvents>? CardDrawn;
+        void DrawCard( );
+        void OnCardDrawn( GameEvents state );
+
+        List<Player>? AllPlayers { get; internal set; }
         Player? CurrentPlayer { get; set; }
-        ICard? RevealedCard { get; set; }
+        event EventHandler<GameEvents>? PlayerChanged;
+        void ChangeCurrentPlayer();
+        void OnPlayerChanged( GameEvents state );
 
 
-        TurnState? TurnState { get; }
-        event EventHandler<TurnEventArgs>? TurnStateChanged;
+        TurnState? TurnState { get; set; }
+        event EventHandler<GameEvents>? TurnStateChanged;
         void ChangeTurnState( );
-        void OnTurnStateChange( );
+        void OnTurnStateChange( GameEvents state );
 
 
-        GameState? State { get; }
-        event EventHandler<GameEventArgs>? GameStateChanged;
+        GameState? State { get; internal set; }
+        event EventHandler<GameEvents>? GameStateChanged;
         void ChangeGameState( );
-        void OnGameStateChange( GameEventArgs state );
+        void OnGameStateChange( GameEvents state );
 }

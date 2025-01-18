@@ -35,8 +35,11 @@ class Player : IPlayer<Card>
                 throw new NotImplementedException( );
         }
 
-        public void Update( object gameController , EventArgs args )
+        public void Update( object gameController , GameEvents args )
         {
-                throw new NotImplementedException( );
+                if(args is GameEvents gameArgs)
+                {
+
+                }
         }
 }

@@ -23,9 +23,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CardGameSimulator.Logic.Contracts.IGameController">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="4" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAACAACAAAAAAABAAAAAAAAgIEgAAAAAAAoAlAAAAAA=</HashCode>
+      <HashCode>gAACAACAAAAAgEBAAAAAAAAgMEgAAAAgAAsAlAAAAAA=</HashCode>
       <FileName>Contracts\IGameController.cs</FileName>
     </TypeIdentifier>
   </Interface>

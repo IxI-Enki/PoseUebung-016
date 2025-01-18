@@ -4,15 +4,9 @@ namespace CardGameSimulator.Logic.Contracts;
 
 interface IDeck
 {
+        List<Card>? Cards { get; set; }
 
-
-        List<ICard>? Cards { get; set; }
-
-        abstract void Shuffle( );
-        abstract void DrawCard( object controller , CardEventArgs card );
-
-
-        // void DrawCards( );
-        // ICard? RevealedCard { get; }
+         void Shuffle( );
+         void DrawCard( object controller , CardEventArgs card );
 
 }
