@@ -4,7 +4,7 @@
 ### <p align="center"> Class Diagram </p>
 ```mermaid
 classDiagram
-  direction RL
+  direction BT
     class Originator {
         -state: string
         +CreateMemento() Memento
