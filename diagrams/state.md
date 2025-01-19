@@ -23,10 +23,10 @@ classDiagram
     IState <|.. ConcreteStateA : implements
     IState <|.. ConcreteStateB : implements
 
- %%   note for Context "Context holds a reference to some State object.\nThe Context delegates to the State object for handling requests."
- %%   note for IState "State interface declares a common interface for all concrete states."
- %%   note for ConcreteStateA "ConcreteStateA implements the State interface and defines a behavior associated with this state."
- %%   note for ConcreteStateB "ConcreteStateB implements the State interface and defines a behavior associated with this state."
+    note for Context "Manages the current state and can switch states."
+    %% note for IState "State interface declares a common interface for all concrete states."
+    note for ConcreteStateA "Implements behavior for State A."
+    note for ConcreteStateB "Implements behavior for State B."
 ```
 ---
 ### <p align="center"> Sequence Diagram </p>
