@@ -27,9 +27,9 @@ classDiagram
     Originator -- Memento : creates and sets
     Caretaker o-- Memento : manages
 
-    note for Originator "Responsible for creating a memento with internal state and restoring from it."
-    note for Memento "Stores internal state of Originator. Immutable."
-    note for Caretaker "Manages the Memento, doesn't know about the state details."
+    note for Originator "Creating a memento with internal state and restoring from it"
+    note for Memento "Stores state of Originator, Immutable"
+    note for Caretaker "Manages Memento, doesn't know about the state details"
 ```
 ---
 ### <p align="center"> Sequence Diagram </p>
