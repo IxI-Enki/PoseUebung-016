@@ -48,7 +48,8 @@ sequenceDiagram
 ```
 
 ---
-<div align="center">
+<div align="left">
+
 
 ```c#
   public sealed class Singleton : ISingletonOperation
